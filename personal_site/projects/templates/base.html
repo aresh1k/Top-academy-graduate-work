@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <link rel="icon" type="image/x-icon" href="{% static 'skills/favicon.ico' %}">
+<!--    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">-->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
     <title>Title</title>
@@ -12,6 +12,9 @@
 <body>
 
 {% include 'projects/navbar.html' %}
+
+{% block content %}
+{% endblock %}
 
 </body>
 </html>
