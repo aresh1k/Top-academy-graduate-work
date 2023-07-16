@@ -5,7 +5,7 @@ def main(request):
     return render(request, 'projects/main.html')
 
 
-def main(request):
+def blog(request):
     return render(request, 'projects/blog.html')
 
 

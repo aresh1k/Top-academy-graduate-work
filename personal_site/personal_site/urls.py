@@ -1,10 +1,4 @@
 """
-URL configuration for personal_site project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
-Examples:
-Function views
     1. Add an import:  from my_app import views
     2. Add a URL to urlpatterns:  path('', views.home, name='home')
 Class-based views
@@ -16,11 +10,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from projects import views
+from projects import views as project_views
+from users import views as users_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.main, name='main'),
-    path('blog/', views.blog, name='blog'),
-    path('projects/', views.projects, name='projects'),
+    path('', project_views.main, name='main'),
+    path('blog/', project_views.blog, name='blog'),
+    path('projects/', project_views.projects, name='projects'),
+    path('account/', users_views.user_account, name='account'),
+    path('logout/', users_views.user_login, name='logout'),
+    path('login/', users_views.user_logout, name='login'),
 ]
