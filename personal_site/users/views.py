@@ -34,5 +34,6 @@ def user_login(request):
 
 
 def user_logout(request):
-    logout(request)
-    return redirect('login')
+    if request.method == "POST":
+        logout(request)
+        return redirect('main')

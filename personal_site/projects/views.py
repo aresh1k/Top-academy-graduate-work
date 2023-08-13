@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Project
+from .models import Project, Article
 
 
 def main(request):
@@ -12,7 +12,12 @@ def main(request):
 
 
 def blog(request):
-    return render(request, 'projects/blog.html')
+    if request.method == "POST":
+        images = request.FILES.getlist('images')
+        for image in images:
+            Article.objects.create(images=image)
+    images = Article.objects.all()
+    return render(request, 'projects/blog.html', {'images': images})
 
 
 def projects(request):

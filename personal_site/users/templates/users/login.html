@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'projects/base.html' %}
 
-</body>
-</html>
+{% block content %}
+
+    <div class="login_block">
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button>Войти</button>
+        </form>
+    </div>
+
+{% endblock %}
