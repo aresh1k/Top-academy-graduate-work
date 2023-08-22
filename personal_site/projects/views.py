@@ -12,13 +12,22 @@ def main(request):
 
 
 def blog(request):
-    if request.method == "POST":
-        images = request.FILES.getlist('images')
-        for image in images:
-            Article.objects.create(images=image)
-    images = Article.objects.all()
-    return render(request, 'projects/blog.html', {'images': images})
+    posts = Article.objects.all()
+    context = {
+        'posts': posts,
+    }
+    last_blogs = Article.objects.all().order_by('-id')[:8]
+    if len(last_blogs) >= 8:
+        context['last_blogs'] = last_blogs
+    return render(request, 'projects/blog.html', context)
 
 
 def projects(request):
-    return render(request, 'projects/projects.html')
+    projects_data = Project.objects.all()
+    context = {
+        'projects': projects_data,
+    }
+    last_projects = Project.objects.all().order_by('-id')[:2]
+    if len(last_projects) > 1:
+        context['last_projects'] = last_projects
+    return render(request, 'projects/projects.html', context)

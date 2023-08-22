@@ -2,14 +2,14 @@
 
 {% block content %}
 
-    <section class="login_block">
+    <section class="sign_block">
         <form method="post">
             {% csrf_token %}
             <label for="">Имя</label><br>
             {{ form.username }}
             <label for="">Пароль</label><br>
             {{ form.password }}
-            <button>Войти</button>
+            <button>Зарегистрироваться</button>
         </form>
     </section>
 

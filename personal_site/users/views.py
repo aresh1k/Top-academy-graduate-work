@@ -3,10 +3,39 @@ from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+from .models import Profile
+from .forms import LoginForm
 
 
 def user_account(request):
-    return render(request, 'users/account.html')
+    account_data = Profile.objects.all()
+    context = {
+        'account': account_data,
+    }
+    return render(request, 'users/account.html', account_data)
+
+
+def user_register(request):
+    page = 'registration'
+    form = CustomUserCreationForm()
+
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            messages.success(request, 'User account was created!')
+            login(request, user)
+            return redirect('profiles')
+        else:
+            messages.error(request, "An error has occurred during registration")
+
+    context = {
+        'page': page,
+        'form': form,
+    }
+    return render(request, 'users/registration.html', context)
 
 
 def user_login(request):

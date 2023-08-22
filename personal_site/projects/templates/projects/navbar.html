@@ -17,7 +17,7 @@
         <div>
           <ul class="header_menu sign_in">
             {% if request.user.is_authenticated %}
-            <li class="header_menu_item"><a href="{% url 'account' %}">Account</a></li>
+            <li class="header_menu_item"><a href="{% url 'account' %}"><img src="{% static 'images/account.svg' %}" alt="Account" /></a></li>
             <li class="header_menu_item"><a href="{% url 'logout' %}" class="logout">Logout</a></li>
             {% else %}
             <li class="header_menu_item"><a href="{% url 'login' %}" class="login">Login</a></li>
