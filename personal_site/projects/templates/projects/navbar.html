@@ -1,5 +1,5 @@
 {% load static %}
-<header class="header">
+<header>
   <nav class="header_nav">
     <div class="nav_container">
       <div class="logo_container">
@@ -10,17 +10,17 @@
       <div class="links_container">
         <div>
           <ul class="header_menu links">
-            <li class="header_menu_item first_delimeter"><a href="{% url 'blog' %}">Blog</a></li>
-            <li class="header_menu_item delimeter"><a href="{% url 'projects' %}">Projects</a></li>
+            <li class="header_menu_item first_delimeter"><a href="{% url 'blog' %}">Блог</a></li>
+            <li class="header_menu_item delimeter"><a href="{% url 'projects' %}">Проекты</a></li>
           </ul>
         </div>
         <div>
           <ul class="header_menu sign_in">
             {% if request.user.is_authenticated %}
-            <li class="header_menu_item"><a href="{% url 'account' %}"><img src="{% static 'images/account.svg' %}" alt="Account" /></a></li>
-            <li class="header_menu_item"><a href="{% url 'logout' %}" class="logout">Logout</a></li>
+            <li class="header_menu_item account"><a href="{% url 'account' %}"><img src="{% static 'images/account.svg' %}" alt="Account" /></a></li>
+            <li class="header_menu_item"><a href="{% url 'logout' %}" class="logout">Выйти</a></li>
             {% else %}
-            <li class="header_menu_item"><a href="{% url 'login' %}" class="login">Login</a></li>
+            <li class="header_menu_item"><a href="{% url 'login' %}" class="login">Войти</a></li>
             {% endif %}
           </ul>
         </div>

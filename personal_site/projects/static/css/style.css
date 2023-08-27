@@ -2,10 +2,47 @@ body {
     margin: 0;
     padding: 0;
     font-size: 24px;
+    min-height: 600px;
 }
 
 #main_page {
     background: #282828;
+}
+
+footer {
+    margin-top: 20px;
+    padding: 0;
+    vertical-align: bottom;
+}
+
+.footer_container {
+    margin: 0 auto;
+    height: 40px;
+    max-width: 1280px;
+    display: flex;
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background: #3c3c3c;
+    color: white;
+    border-radius: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.footer_container a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-left: 10px;
+}
+
+.footer_container img {
+    height: 30px;
+    weight: 30px;
 }
 
 .header {
@@ -49,13 +86,13 @@ body {
 }
 
 .links {
-    min-width: 1000px;
+    min-width: 900px;
     height: 40px;
     justify-content: flex-start;
 }
 
 .sign_in {
-    min-width: 180px;
+    min-width: 280px;
     justify-content: flex-end;
 }
 
@@ -102,6 +139,11 @@ body {
     border-right: 1px solid white;
 }
 
+.account img{
+    height: 40px;
+    width: 40px;
+}
+
 .header_menu_item > a {
     display: flex;
     align-items: center;
@@ -112,6 +154,7 @@ body {
     font-weight: 300;
 }
 
+/*
 .login {
     width: 100px;
     height: 40px;
@@ -127,6 +170,7 @@ body {
     background: black;
     justify-content: center;
 }
+*/
 
 .main_content {
     margin: 20px auto;
@@ -160,9 +204,12 @@ body {
 }
 
 .section_projects header {
-    margin: 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
     padding: 0;
-    height: 40px;
+    height: 60px;
     font-size: 30px;
     text-align: center;
     color: white;
@@ -179,12 +226,61 @@ body {
 }
 
 .section_blog header {
-    margin: 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
     padding: 0;
-    height: 40px;
+    height: 60px;
     font-size: 30px;
     text-align: center;
     color: white;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
 }
+
+#none_projects {
+    height: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+#none_projects img {
+    display: flex;
+    width: 120px;
+    height: 120px;
+    margin: 20px 0;
+}
+
+#none_projects p {
+    margin: auto 0;
+    padding: 0;
+    }
+
+#none_posts {
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+#none_posts img {
+    display: flex;
+    width: 120px;
+    height: 120px;
+    margin: 20px 0;
+}
+
+#none_posts p {
+    margin: auto 0;
+    padding: 0;
+    }

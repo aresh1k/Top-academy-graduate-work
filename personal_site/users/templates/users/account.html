@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'projects/base.html' %}
 
-</body>
-</html>
+{% load static %}
+
+{% block content %}
+
+<section class="section_container">
+    <div class="account_image">
+        <img src="{{ account.image }}" alt="">
+        {% if request.user.account.id == account.id %}
+        <img src="{% static 'images/settings.svg' %}" alt="Settings">
+        {% endif %}
+    </div>
+    <div>
+        <ul>
+            <li>
+                {% if account.profile_name != None %}
+                    {{ account.profile_name }}
+                {% endif %}
+            </li>
+            <li id="ingame_account">Игровой аккаунт:
+                {% if account.game_account != None %}
+                    <a href="{{ account.game_account }}"><img src="{% static 'images/opgg.png' %}" alt="OP.GG"></a>
+                {% endif %}
+            </li>
+            <li>Статус:
+                {% if account.team_status != None %}
+                    {{ account.team_status }}
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</section>
+
+{% endblock %}

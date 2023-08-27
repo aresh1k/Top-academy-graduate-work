@@ -2,15 +2,25 @@
 
 {% block content %}
 
-    <section class="sign_block">
-        <form method="post">
-            {% csrf_token %}
-            <label for="">Имя</label><br>
-            {{ form.username }}
-            <label for="">Пароль</label><br>
-            {{ form.password }}
-            <button>Зарегистрироваться</button>
-        </form>
-    </section>
+<section class="sign_block">
+    <form action="{% url 'registration' %}" method="post">
+        {% csrf_token %}
+        <h2>Регистрация нового пользователя</h2>
+        {% for field in form %}
+        <p>
+            {% if field.errors %}
+
+                {% for error in field.errors %}
+                <p>{{ error }}</p>
+                {% endfor %}
+
+            {% endif %}
+            {{ field.label_tag }} {{ field }}
+        </p>
+        {% endfor %}
+        <input type="submit" value="Зарегистрироваться" />
+        <p>Уже есть учетная запись? <a href="{% url 'login' %}">Войти</a></p>
+    </form>
+</section>
 
 {% endblock %}

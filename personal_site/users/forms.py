@@ -1,32 +1,39 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 
-class LoginForm(forms.Form):
+class LoginForm(AuthenticationForm):
     username = forms.CharField(max_length=20)
-    password = forms.CharField(max_length=30)
+    password = forms.CharField(max_length=30, widget=forms.PasswordInput())
+
+    class Meta:
+        model = User
+        fields = ('username', 'password')
 
 
 class RegistrationForm(UserCreationForm):
-    username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class':'form-input'}))
-    email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-input'}))
-    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
-    password2 = forms.CharField(label='Повтор пароля', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
+    username = forms.CharField(label='Логин', max_length=20)
+    email = forms.EmailField(label='Email')
+    password1 = forms.CharField(label='Пароль', max_length=30, widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Повтор пароля', max_length=30, widget=forms.PasswordInput)
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        new = User.objects.filter(username=username)
+        if new.count():
+            raise ValidationError("Такое имя пользователя уже существует")
+        return username
+
+    def clean_email(self):
+        email = self.cleaned_data['email'].lower()
+        new = User.objects.filter(email=email)
+        if new.count():
+            raise ValidationError("Такой адрес электронной почты уже существует")
+        return email
 
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
 
-
-class CustomUserCreationForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ['first_name', 'email', 'username', 'password1', 'password2']
-        labels = {'first_name': 'Name'}
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        for name, field in self.fields.items():
-            field.widget.attrs.update({'class': 'input'})

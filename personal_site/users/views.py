@@ -4,35 +4,32 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from .models import Profile
-from .forms import LoginForm
+from .forms import RegistrationForm, LoginForm
 
 
-def user_account(request):
-    account_data = Profile.objects.all()
+def user_account(request, pk):
+    account_data = Profile.objects.get(id=pk)
     context = {
         'account': account_data,
     }
-    return render(request, 'users/account.html', account_data)
+    return render(request, 'users/account.html', context)
 
 
 def user_register(request):
-    page = 'registration'
-    form = CustomUserCreationForm()
-
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
-            messages.success(request, 'User account was created!')
+            messages.success(request, 'Учетная запись успешно создана!')
             login(request, user)
-            return redirect('profiles')
+            return redirect('main')
         else:
-            messages.error(request, "An error has occurred during registration")
+            messages.error(request, "Произошла непредвиденная ошибка во время регистрации")
 
+    form = RegistrationForm()
     context = {
-        'page': page,
         'form': form,
     }
     return render(request, 'users/registration.html', context)
@@ -57,12 +54,16 @@ def user_login(request):
             login(request, user)
             return redirect('main')
         else:
-            messages.error(request, "Username or password is incorrect")
+            messages.error(request, 'Username or password is incorrect')
 
-    return render(request, 'users/login.html')
+    form = LoginForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'users/login.html', context)
 
 
 def user_logout(request):
-    if request.method == "POST":
-        logout(request)
-        return redirect('main')
+    logout(request)
+    messages.info(request, 'User was logged out!')
+    return redirect('main')

@@ -1,5 +1,7 @@
 {% extends 'projects/base.html' %}
 
+{% load static %}
+
 {% block content %}
 
 <div class="main_content">
@@ -18,21 +20,37 @@
 
         <section class="section_projects">
             <header>
-                Latest projects
+                Последние проекты
             </header>
-            <article>
-            </article>
+            {% if projects %}
+                {% for project in projects %}
+                <article>
+                </article>
+                {% endfor %}
+            {% else %}
+                <div id="none_projects">
+                    <img src="{% static 'images/none_projects.svg' %}" alt="No projects">
+                    <p>В настоящий момент проекты не представлены</p>
+                </div>
+            {% endif %}
         </section>
     </div>
 
     <div class="section_container">
         <section class="section_blog">
             <article>
-                <header>Latest publications</header>
-                <figure>
-                    <p><img src="" alt=""></p>
-                    <figcaption></figcaption>
-                </figure>
+                <header>Последние публикации</header>
+                {% if posts %}
+                    <figure>
+                        <p><img src="" alt=""></p>
+                        <figcaption></figcaption>
+                    </figure>
+                {% else %}
+                    <div id="none_posts">
+                        <img src="{% static 'images/none_posts.svg' %}" alt="No publications">
+                        <p>В настоящий момент публикаций нет</p>
+                    </div>
+                {% endif %}
             </article>
         </section>
     </div>

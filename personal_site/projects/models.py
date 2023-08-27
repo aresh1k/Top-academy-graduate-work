@@ -9,6 +9,9 @@ class Article(models.Model):
     link = models.CharField(max_length=200, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.title
+
 
 class Project(models.Model):
     title = models.CharField(max_length=100)
@@ -16,3 +19,6 @@ class Project(models.Model):
     image = models.ImageField(upload_to='projects/', default='projects/project_default.jpg')
     link = models.CharField(max_length=200, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
