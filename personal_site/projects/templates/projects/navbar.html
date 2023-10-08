@@ -4,7 +4,7 @@
     <div class="nav_container">
       <div class="logo_container">
         <a href="{% url 'main' %}" class="header_logo">
-          <img src="{% static 'images/home.svg' %}" alt="Main" />
+          <img src="{% static 'images/home.svg' %}" alt="Main"/>
         </a>
       </div>
       <div class="links_container">
@@ -12,12 +12,13 @@
           <ul class="header_menu links">
             <li class="header_menu_item first_delimeter"><a href="{% url 'blog' %}">Блог</a></li>
             <li class="header_menu_item delimeter"><a href="{% url 'projects' %}">Проекты</a></li>
+            <li class="header_menu_item delimeter"><a href="{% url 'forum' %}">Форум</a></li>
           </ul>
         </div>
         <div>
           <ul class="header_menu sign_in">
             {% if request.user.is_authenticated %}
-            <li class="header_menu_item account"><a href="{% url 'account' %}"><img src="{% static 'images/account.svg' %}" alt="Account" /></a></li>
+            <li class="header_menu_item account"><a href="{% url 'account' user.id %}"><img src="{% static 'images/account.svg' %}" alt="Account"/></a></li>
             <li class="header_menu_item"><a href="{% url 'logout' %}" class="logout">Выйти</a></li>
             {% else %}
             <li class="header_menu_item"><a href="{% url 'login' %}" class="login">Войти</a></li>

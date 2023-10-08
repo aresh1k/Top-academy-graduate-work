@@ -1,0 +1,28 @@
+{% extends 'projects/base.html' %}
+
+{% block content %}
+
+<section class="section_centered">
+    <div class="forum_section">
+        {% if discussions %}
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'create_discussion' %}" class='create_discussion_button'>Создать обсуждение</a>
+            {% endif %}
+        {% for discussion in discussions %}
+        <div class="discussion_container">
+            <a href="{% url 'discussion' discussion.id %}" >
+                <p>{{ discussion.title }}</p>
+            </a>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h2>Темы для обсуждений еще не созданы</h2>
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'create_discussion' %}">Создать обсуждение</a>
+            {% endif %}
+        {% endif %}
+    </div>
+    {% include 'projects/pagination.html' with queryset=discussions custom_range=custom_range %}
+</section>
+
+{% endblock %}

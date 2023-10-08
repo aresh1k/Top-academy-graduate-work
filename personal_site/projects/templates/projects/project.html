@@ -1,0 +1,11 @@
+{% extends 'projects/base.html' %}
+
+{% block content %}
+
+<section class="project_section">
+    <article>{{ project.title }}</article>
+    <div class="project_image"><img src="{{ project.image.url }}" alt="image"></div>
+    <p>{{ project.description }}</p>
+</section>
+
+{% endblock %}

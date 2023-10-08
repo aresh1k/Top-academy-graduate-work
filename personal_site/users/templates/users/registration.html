@@ -3,22 +3,24 @@
 {% block content %}
 
 <section class="sign_block">
-    <form action="{% url 'registration' %}" method="post">
+    <form action="{% url 'registration' %}" method="post", class="sign_form">
         {% csrf_token %}
         <h2>Регистрация нового пользователя</h2>
-        {% for field in form %}
-        <p>
-            {% if field.errors %}
+        <div class="form_container form_register">
+            {% for field in form %}
+            <p>
+                {% if field.errors %}
 
-                {% for error in field.errors %}
-                <p>{{ error }}</p>
-                {% endfor %}
+                    {% for error in field.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
 
-            {% endif %}
-            {{ field.label_tag }} {{ field }}
-        </p>
-        {% endfor %}
-        <input type="submit" value="Зарегистрироваться" />
+                {% endif %}
+                {{ field.label_tag }} {{ field }}
+            </p>
+            {% endfor %}
+        </div>
+        <input type="submit" value="Зарегистрироваться" class="sign_button"/>
         <p>Уже есть учетная запись? <a href="{% url 'login' %}">Войти</a></p>
     </form>
 </section>

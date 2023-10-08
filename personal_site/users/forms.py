@@ -1,12 +1,13 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from .models import Profile, TEAM_STATUSES
 
 
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(max_length=20)
-    password = forms.CharField(max_length=30, widget=forms.PasswordInput())
+    username = forms.CharField(label='Логин', max_length=20)
+    password = forms.CharField(label='Пароль', max_length=30, widget=forms.PasswordInput())
 
     class Meta:
         model = User
@@ -37,3 +38,21 @@ class RegistrationForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2')
 
+
+class UpdateUserForm(UserChangeForm):
+    password = None
+
+    class Meta:
+        model = User
+        fields = ['email', ]
+
+
+class UpdateProfileForm(forms.ModelForm):
+    profile_name = forms.CharField(label='Имя профиля', widget=forms.TextInput(attrs={'class': 'profile_text_input', 'rows': 1}))
+    avatar = forms.ImageField(label='Аватар', widget=forms.FileInput(attrs={'class': 'profile_file_input'}))
+    game_account = forms.URLField(label='Игровой аккаунт', widget=forms.URLInput(attrs={'class': 'profile_text_input', 'rows': 1}), required=False)
+    team_status = forms.ChoiceField(label='Статус команды', choices=TEAM_STATUSES, widget=forms.Select(attrs={'class': 'profile_choice_field'}))
+
+    class Meta:
+        model = Profile
+        fields = ['profile_name', 'avatar', 'game_account', 'team_status', ]

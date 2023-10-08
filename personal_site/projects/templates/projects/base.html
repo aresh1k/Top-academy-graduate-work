@@ -14,20 +14,21 @@
 </head>
 <body id="main_page">
 
-{% include 'projects/navbar.html' %}
+    {% include 'projects/navbar.html' %}
 
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 
-{% block content %}
-{% endblock %}
+    {% block content %}
+    {% endblock %}
 
-{% include 'projects/footer.html' %}
+    {% include 'projects/footer.html' %}
 
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

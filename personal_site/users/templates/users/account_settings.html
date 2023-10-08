@@ -1,0 +1,17 @@
+{% extends 'projects/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="account_settings_block">
+    <form action="{% url 'account_settings' %}" method="post" class="account_settings_form", enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Редактирование учетной записи</h2>
+        <div class="form_container">{{ user_settings_form.as_p }}</div>
+        <div class="form_container">{{ profile_settings_form.as_p }}</div>
+        <input type="submit" value="Сохранить" class="save_settings_button"/>
+    </form>
+</section>
+
+{% endblock %}

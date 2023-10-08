@@ -23,10 +23,14 @@
                 Последние проекты
             </header>
             {% if projects %}
+                <article class="projects_article">
                 {% for project in projects %}
-                <article>
-                </article>
+                        <a href="{% url 'project' project.link %}">
+                            <img src="{{ project.image.url }}" alt="Project img">
+                            <p>{{ project.title }}</p>
+                        </a>
                 {% endfor %}
+                </article>
             {% else %}
                 <div id="none_projects">
                     <img src="{% static 'images/none_projects.svg' %}" alt="No projects">
@@ -40,17 +44,22 @@
         <section class="section_blog">
             <article>
                 <header>Последние публикации</header>
+                <div class="last_articles_section">
                 {% if posts %}
-                    <figure>
-                        <p><img src="" alt=""></p>
-                        <figcaption></figcaption>
-                    </figure>
+                    {% for post in posts %}
+                    <a href="{% url 'post' post.link %}">
+                        <figure class="last_articles">
+                            <p><img src="{{ post.preview_image.url }}" alt="post_img"></p>
+                        </figure>
+                    </a>
+                    {% endfor %}
                 {% else %}
                     <div id="none_posts">
                         <img src="{% static 'images/none_posts.svg' %}" alt="No publications">
                         <p>В настоящий момент публикаций нет</p>
                     </div>
                 {% endif %}
+                </div>
             </article>
         </section>
     </div>

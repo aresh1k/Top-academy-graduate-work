@@ -1,0 +1,18 @@
+{% extends 'projects/base.html' %}
+
+{% block content %}
+
+<section class="create_post_block">
+    <form action="{% url 'create_post' %}" method="post", class="create_post_form", enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Создать новую публикацию</h2>
+        {{ form.as_p }}
+        {{ image_form.management_form }}
+        {% for form in imageform %}
+            {{ form }}
+        {% endfor %}
+        <input type="submit" value="Зарегистрироваться" class="sign_button"/>
+    </form>
+</section>
+
+{% endblock %}

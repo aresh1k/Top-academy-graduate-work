@@ -2,6 +2,22 @@
 
 {% block content %}
 
-
+<section class="section_centered">
+    <div class="projects">
+        {% if projects %}
+        {% for project in projects %}
+        <div class="projects_container">
+            <a href="{% url 'project' project.link %}" >
+                <img src="{{ project.image.url }}" alt="preview">
+                <p>{{ project.title }}</p>
+            </a>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h2>В настоящий момент публикаций нет</h2>
+        {% endif %}
+    </div>
+    {% include 'projects/pagination.html' with queryset=projects custom_range=custom_range %}
+</section>
 
 {% endblock %}

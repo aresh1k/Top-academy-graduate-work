@@ -4,28 +4,31 @@
 
 {% block content %}
 
-<section class="section_container">
+<section class="section_container account_container">
     <div class="account_image">
-        <img src="{{ account.image }}" alt="">
-        {% if request.user.account.id == account.id %}
-        <img src="{% static 'images/settings.svg' %}" alt="Settings">
+        <img src="{{ account.avatar.url }}" alt="avatar" class="account_avatar">
+        {% if request.user.id == account.id %}
+        <a href="{% url 'account_settings' %}"><img src="{% static 'images/settings.svg' %}" alt="Settings" class="account_settings"></a>
         {% endif %}
     </div>
-    <div>
+    <div class="account_data">
         <ul>
             <li>
-                {% if account.profile_name != None %}
-                    {{ account.profile_name }}
-                {% endif %}
+                Страница пользователя {{ account.profile_name }}
             </li>
             <li id="ingame_account">Игровой аккаунт:
-                {% if account.game_account != None %}
+                {% if account.game_account %}
                     <a href="{{ account.game_account }}"><img src="{% static 'images/opgg.png' %}" alt="OP.GG"></a>
+                {% else %}
+                    Отсутствует
                 {% endif %}
             </li>
-            <li>Статус:
+            <li>
+                Команда:
                 {% if account.team_status != None %}
                     {{ account.team_status }}
+                {% else %}
+                    Отсутствует
                 {% endif %}
             </li>
         </ul>

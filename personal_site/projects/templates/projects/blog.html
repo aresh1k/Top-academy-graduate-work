@@ -2,5 +2,22 @@
 
 {% block content %}
 
+<section class="section_centered">
+    <div class="blog_posts">
+        {% if posts %}
+        {% for post in posts %}
+        <div class="blog_post_container">
+            <a href="{% url 'post' post.link %}" >
+                <img src="{{ post.preview_image.url }}" alt="preview">
+                <p>{{ post.title }}</p>
+            </a>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h2>В настоящий момент публикаций нет</h2>
+        {% endif %}
+    </div>
+    {% include 'projects/pagination.html' with queryset=posts custom_range=custom_range %}
+</section>
 
 {% endblock %}

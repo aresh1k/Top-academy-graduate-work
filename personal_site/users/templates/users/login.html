@@ -2,14 +2,14 @@
 
 {% block content %}
 
-    <section class="login_block">
-        <form action="{% url 'login' %}" method="post">
-            {% csrf_token %}
-            <h2>Авторизация</h2>
-            {{ form.as_p }}
-            <input type="submit" value="Войти" />
-            <p>Нет учетной записи? <a href="{% url 'registration' %}">Создать</a></p>
-        </form>
-    </section>
+<section class="login_block">
+    <form action="{% url 'login' %}" method="post" class="login_form">
+        {% csrf_token %}
+        <h2>Авторизация</h2>
+        <div class="form_container">{{ form.as_p }}</div>
+        <input type="submit" value="Войти" class="login_button"/>
+        <p>Нет учетной записи?<a href="{% url 'registration' %}">Создать</a></p>
+    </form>
+</section>
 
 {% endblock %}
